@@ -1,0 +1,5 @@
+
+project_id = "htbrczdxerbbglfytfed"
+
+[functions.send-demo-notification]
+verify_jwt = false
