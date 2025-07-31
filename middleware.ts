@@ -1,5 +1,3 @@
-import { NextRequest } from 'next/server';
-
 export const config = { 
   runtime: 'edge',
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
@@ -7,7 +5,7 @@ export const config = {
 
 const TRACKING_URL = 'https://api.smalk.ai/api/v1/tracking/visit';
 
-export default async function middleware(req: NextRequest) {
+export default async function middleware(req: Request) {
   // 1. Build metadata from incoming request
   const url = new URL(req.url);
   const metadata = {
