@@ -71,3 +71,33 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Edge Tracking Middleware
+
+This project includes Vercel Edge Middleware for server-side visit tracking that captures real HTTP requests (initial loads, hard refreshes, direct URL hits).
+
+### How it works
+
+- `middleware.ts` runs on Vercel's Edge Runtime for every incoming request
+- Sends visit metadata to `https://api.smalk.ai/api/v1/tracking/visit`
+- Uses the `SMALK_API_KEY` environment variable for authentication
+- Non-blocking design with ≤ 5ms latency impact
+
+### Environment Variables
+
+Add the following environment variable in your Vercel project settings:
+
+- **Key**: `SMALK_API_KEY`
+- **Value**: Your Smalk API key
+- **Environment**: Production (and Preview if needed)
+
+### Testing
+
+1. Deploy to Vercel with the environment variable set
+2. Visit your site in incognito mode or hard refresh
+3. Check Vercel → Functions → Edge Middleware Logs
+4. Verify tracking data appears in your Smalk dashboard
+
+### Disabling
+
+To disable edge tracking, simply delete or rename `middleware.ts` and redeploy.
